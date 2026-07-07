@@ -3,22 +3,18 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
     first_name:{
         type:String,
-        required:true,
     },
     last_name:{
         type:String,
-        required:true,
     },
     email:{
-        type:String,
-        unique:true,
-        required:true,
+        type:String
     },
     password:{
         type:String,
-        required:true,
         minlength:6
     },
+    gitHubId:{type:String},
     role:{
         type:String,
         enum:["admin","editor","user"],

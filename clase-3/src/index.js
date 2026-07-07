@@ -3,6 +3,8 @@ import dotenv from "dotenv"
 import sessionsRouter from "./routes/sessions.router.js"
 import cookieParser from "cookie-parser"
 import mongoose from "mongoose"
+import passport from "passport"
+import { intialisePassport } from "./config/passport.js"
 
 dotenv.config()
 const app = express()
@@ -10,6 +12,8 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser(process.env.COOKIE_SECRET))
 mongoose.connect(process.env.MONGO_URI)
+intialisePassport()
+app.use(passport.initialize())
 
 app.use("/api/sessions",sessionsRouter)
 
