@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         minlength:6
     },
-    gitHubId:{type:String},
+    githubId:{type:String},
     role:{
         type:String,
         enum:["admin","editor","user"],

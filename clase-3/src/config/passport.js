@@ -104,7 +104,7 @@ export const intialisePassport = () => {
         callbackURL:process.env.GITHUB_CALLBACK_URL
     },async (_,__,profile,done)=>{
         try {
-            const user = await UserModel.findOne({gitHubId:profile._json.id})
+            const user = await UserModel.findOne({githubId:profile._json.id})
             if(user){
                 const userForToken = {
                         id:user._id,
@@ -112,7 +112,7 @@ export const intialisePassport = () => {
                         last_name:user.last_name,
                         role:user.role
                 }
-                done(null,userForToken)
+                return done(null,userForToken)
             }
             const newUser = {
                 githubId:profile._json.id,
@@ -122,16 +122,16 @@ export const intialisePassport = () => {
 
             const userCreated = await UserModel.create(newUser)
             const userForToken = {
-                        id:user._id,
-                        first_name:user.first_name,
-                        last_name:user.last_name ? user.last_name : "",
-                        role:user.role
+                        id:userCreated._id,
+                        first_name:userCreated.first_name,
+                        last_name:userCreated.last_name ? userCreated.last_name : "",
+                        role:userCreated.role
             }
             return done(null,userForToken)
 
 
         } catch (error) {
-            
+            return done(error,false,{message:"Error interno del servidor"})
         }
     }))
 
