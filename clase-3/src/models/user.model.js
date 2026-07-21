@@ -17,10 +17,10 @@ const userSchema = new mongoose.Schema({
     githubId:{type:String},
     role:{
         type:String,
-        enum:["admin","editor","user"],
+        enum:["admin","organizer","user"],
         default:"user"
     }
-})
+},{timestamps:true})
 
 export const UserModel = mongoose.model("User",userSchema)
 

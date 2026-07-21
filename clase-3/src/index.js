@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import mongoose from "mongoose"
 import passport from "passport"
 import { intialisePassport } from "./config/passport.js"
+import eventsRouter from "./routes/events.router.js"
 
 dotenv.config()
 const app = express()
@@ -16,5 +17,6 @@ intialisePassport()
 app.use(passport.initialize())
 
 app.use("/api/sessions",sessionsRouter)
+app.use("/api/events",eventsRouter)
 
 app.listen(process.env.PORT,()=> console.log("server in port: " + process.env.PORT))
